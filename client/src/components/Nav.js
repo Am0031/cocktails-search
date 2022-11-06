@@ -36,7 +36,7 @@ const Nav = () => {
           <span role="img" aria-label="shopping bag">
             🛍️
           </span>
-          -Shop-Redux
+          Cocktails Party
         </Link>
       </h1>
       <nav>{showNavigation()}</nav>
