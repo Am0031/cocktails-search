@@ -13,7 +13,7 @@ import Home from "./containers/Home";
 import NoMatch from "./containers/NoMatch";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
-import History from "./containers/OrderHistory";
+import Saved from "./containers/Saved";
 import Nav from "./components/Nav";
 import store from "./utils/store";
 
@@ -48,7 +48,7 @@ function App() {
               <Route exact path="/" element={<Home />} />
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/signup" element={<Signup />} />
-              <Route exact path="/history" element={<History />} />
+              <Route exact path="/saved" element={<Saved />} />
               <Route component={<NoMatch />} />
             </Routes>
           </Provider>
