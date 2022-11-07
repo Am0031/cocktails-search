@@ -35,10 +35,13 @@ const Nav = () => {
     <header className="flex-row px-1">
       <h1>
         <Link to="/">
-          <span role="img" aria-label="shopping bag">
-            🛍️
+          <span role="img" aria-label="cocktail1">
+            🍹
           </span>
           Cocktails Party
+          <span role="img" aria-label="cocktail2">
+            🍸
+          </span>
         </Link>
       </h1>
       <nav>{showNavigation()}</nav>
