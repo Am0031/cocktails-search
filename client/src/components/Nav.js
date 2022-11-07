@@ -1,13 +1,15 @@
 import Auth from "../utils/auth";
 import { Link } from "react-router-dom";
 
+//possible to amend with modal for login/signup - is it worth it?
+
 const Nav = () => {
   const showNavigation = () => {
     if (Auth.loggedIn()) {
       return (
         <ul className="flex-row">
           <li className="mx-1">
-            <Link to="/orderHistory">Order History</Link>
+            <Link to="/saved">My saved cocktails</Link>
           </li>
           <li className="mx-1">
             <a href="/" onClick={() => Auth.logout()}>
