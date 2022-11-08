@@ -14,7 +14,7 @@ const initialState = {
 const reducers = (state = initialState, action) => {
   //add all reducer cases with switch/case syntax
   switch (action.type) {
-    case ADD_TO_SAVED:
+    case ADD_TO_CART:
       return {
         ...state,
         cartOpen: true,
