@@ -17,6 +17,12 @@ export const searchCocktailsByCategory = (query) => {
   return fetch(`www.thecocktaildb.com/api/json/v1/1/filter.php?c=${query}`);
 };
 
+//search by ingredient
+// www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
+export const searchCocktailsByIngredient = (query) => {
+  return fetch(`www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`);
+};
+
 //get full cocktail details by id
 // www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
 export const getCocktailDetails = (id) => {
