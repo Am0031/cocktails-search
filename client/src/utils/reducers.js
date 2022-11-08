@@ -4,7 +4,7 @@ const initialState = {
   products: [],
   categories: [],
   currentCategory: "",
-  letters: [],
+  letters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   currentLetter: "",
   cart: [],
   cartOpen: false,
