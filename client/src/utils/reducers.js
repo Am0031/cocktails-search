@@ -1,11 +1,11 @@
-import {
-  ADD_TO_CART,
-} from "./actions";
+import { ADD_TO_CART } from "./actions";
 
 const initialState = {
   products: [],
   categories: [],
   currentCategory: "",
+  letters: [],
+  currentLetter: "",
   cart: [],
   cartOpen: false,
 };
@@ -14,13 +14,13 @@ const initialState = {
 const reducers = (state = initialState, action) => {
   //add all reducer cases with switch/case syntax
   switch (action.type) {
-    case ADD_TO_CART:
+    case ADD_TO_SAVED:
       return {
         ...state,
         cartOpen: true,
         cart: [...state.cart, action.product],
       };
-    
+
     case UPDATE_CATEGORIES:
       return {
         ...state,
@@ -31,7 +31,12 @@ const reducers = (state = initialState, action) => {
         ...state,
         currentCategory: action.currentCategory,
       };
-    
+    case UPDATE_CURRENT_LETTER:
+      return {
+        ...state,
+        currentLetter: action.currentLetter,
+      };
+
     case REMOVE_FROM_CART:
       let newState = state.cart.filter((product) => {
         return product._id !== action._id;
