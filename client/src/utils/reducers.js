@@ -1,4 +1,9 @@
-import { ADD_TO_CART } from "./actions";
+import {
+  ADD_TO_CART,
+  UPDATE_CURRENT_LETTER,
+  UPDATE_CATEGORIES,
+  UPDATE_CURRENT_CATEGORY,
+} from "./actions";
 
 const initialState = {
   products: [],
