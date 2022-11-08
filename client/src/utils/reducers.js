@@ -5,12 +5,15 @@ import {
   UPDATE_CURRENT_CATEGORY,
 } from "./actions";
 
+//split states into relevant groups and then consolidate them into one initial state with spread operator - to look into when rebuilding
 const initialState = {
   products: [],
+  searchTypes: [],
+  currentSearchType: 0,
   categories: [],
-  currentCategory: "",
+  currentCategory: 0,
   letters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  currentLetter: "",
+  currentLetter: 0,
   cart: [],
   cartOpen: false,
 };
