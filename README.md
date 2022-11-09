@@ -67,3 +67,5 @@ This will display a confirmation message in the terminal, and your react app is 
 Make sure to keep both terminals open for the app to work.
 
 ## Contact
+
+If you have any questions about this application, feel free to get in touch by sending me an [email](mailto:amelie.pira@gmail.com).
