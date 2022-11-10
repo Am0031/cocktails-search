@@ -11,12 +11,38 @@ const initialState = {
   searchTypes: ["letters", "categories", "name"],
   currentSearchType: 0,
   categories: ["gin", "vodka", "bourbon", "rum", "tequila"],
-  currentCategory: 0,
-  letters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  name: "",
+  currentCategory: "",
+  letters: [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+  ],
+  cocktailName: "",
   currentLetter: 0,
   saved: [],
-  cartOpen: false,
 };
 
 //reducer function - arguments: initial state/state and actions
@@ -46,7 +72,7 @@ const reducers = (state = initialState, action) => {
     case UPDATE_NAME:
       return {
         ...state,
-        name: action.name,
+        cocktailName: action.cocktailName,
       };
     case UPDATE_COCKTAILS:
       return {
