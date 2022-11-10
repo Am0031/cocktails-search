@@ -7,14 +7,15 @@ import {
 
 //split states into relevant groups and then consolidate them into one initial state with spread operator - to look into when rebuilding
 const initialState = {
-  products: [],
-  searchTypes: [],
+  cocktails: [],
+  searchTypes: ["letters", "categories", "name"],
   currentSearchType: 0,
-  categories: [],
+  categories: ["gin", "vodka", "bourbon", "rum", "tequila"],
   currentCategory: 0,
   letters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  name: "",
   currentLetter: 0,
-  cart: [],
+  saved: [],
   cartOpen: false,
 };
 
@@ -22,17 +23,15 @@ const initialState = {
 const reducers = (state = initialState, action) => {
   //add all reducer cases with switch/case syntax
   switch (action.type) {
-    case ADD_TO_CART:
+    case ADD_TO_SAVED:
       return {
         ...state,
-        cartOpen: true,
-        cart: [...state.cart, action.product],
+        saved: [...state.saved, action.cocktail],
       };
-
-    case UPDATE_CATEGORIES:
+    case UPDATE_SEARCH_TYPE:
       return {
         ...state,
-        categories: [...action.categories],
+        currentSearchType: action.currentSearchType,
       };
     case UPDATE_CURRENT_CATEGORY:
       return {
@@ -44,27 +43,29 @@ const reducers = (state = initialState, action) => {
         ...state,
         currentLetter: action.currentLetter,
       };
-
-    case REMOVE_FROM_CART:
-      let newState = state.cart.filter((product) => {
-        return product._id !== action._id;
+    case UPDATE_NAME:
+      return {
+        ...state,
+        name: action.name,
+      };
+    case UPDATE_COCKTAILS:
+      return {
+        ...state,
+        cocktails: [...action.cocktails],
+      };
+    case REMOVE_FROM_SAVED:
+      let newState = state.saved.filter((item) => {
+        return item._id !== action._id;
       });
 
       return {
         ...state,
-        cartOpen: newState.length > 0,
-        cart: newState,
+        saved: newState,
       };
-    case CLEAR_CART:
+    case CLEAR_SAVED:
       return {
         ...state,
-        cartOpen: false,
-        cart: [],
-      };
-    case TOGGLE_CART:
-      return {
-        ...state,
-        cartOpen: !state.cartOpen,
+        saved: [],
       };
     default:
       return state;
