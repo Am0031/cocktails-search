@@ -16,8 +16,14 @@ const CategoryMenu = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
 
-  const { searchTypes, currentSearchType, letters, categories, cocktailName } =
-    state;
+  const {
+    searchTypes,
+    currentSearchType,
+    letters,
+    currentLetter,
+    categories,
+    cocktailName,
+  } = state;
 
   const handleTypeClick = (type) => {
     dispatch({
