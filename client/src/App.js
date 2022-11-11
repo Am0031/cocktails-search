@@ -10,6 +10,7 @@ import { setContext } from "@apollo/client/link/context";
 import { Provider } from "react-redux";
 
 import Home from "./containers/Home";
+import Detail from "./containers/Detail";
 import NoMatch from "./containers/NoMatch";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
@@ -49,6 +50,7 @@ function App() {
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/signup" element={<Signup />} />
               <Route exact path="/saved" element={<Saved />} />
+              <Route exact path="/cocktail/:id" element={<Detail />} />
               <Route component={<NoMatch />} />
             </Routes>
           </Provider>
