@@ -1,6 +1,5 @@
 import ProductList from "../components/ProductList";
 import CategoryMenu from "../components/CategoryMenu";
-import Cart from "../components/Cart";
 
 //this page links to the cocktail api with this url: www.thecocktaildb.com/api/json/v1/1/search.php?f=a
 import { searchCocktailsByLetter } from "../utils/api";
