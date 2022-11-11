@@ -1,8 +1,12 @@
 import {
-  ADD_TO_CART,
+  ADD_TO_SAVED,
   UPDATE_CURRENT_LETTER,
-  UPDATE_CATEGORIES,
+  UPDATE_SEARCH_TYPE,
   UPDATE_CURRENT_CATEGORY,
+  UPDATE_NAME,
+  UPDATE_COCKTAILS,
+  REMOVE_FROM_SAVED,
+  CLEAR_SAVED,
 } from "./actions";
 
 //split states into relevant groups and then consolidate them into one initial state with spread operator - to look into when rebuilding
