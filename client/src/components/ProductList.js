@@ -42,18 +42,7 @@ const ProductList = () => {
 
   //function to get cocktails by name
   const getByNameAndDispatch = async (name) => {
-    const response = await searchCocktailsByName(name);
-    if (!response.ok) {
-      console.log("something went wrong!");
-    }
-    const { drinks } = await response.json();
-    const cocktails = drinks.map((item) => {
-      return {
-        _id: item.idDrink,
-        name: item.strDrink,
-        image: item.strDrinkThumb,
-      };
-    });
+    const cocktails = await searchCocktailsByName(name);
     dispatch({
       type: UPDATE_COCKTAILS,
       cocktails: cocktails,

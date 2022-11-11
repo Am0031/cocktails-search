@@ -23,10 +23,22 @@ export const searchCocktailsByLetter = async (query) => {
 
 //search by name
 // www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita
-export const searchCocktailsByName = (query) => {
-  return fetch(
+export const searchCocktailsByName = async (query) => {
+  const response = await fetch(
     `http://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`
   );
+  if (!response.ok) {
+    console.log("something went wrong!");
+  }
+  const { drinks } = await response.json();
+  const cocktails = drinks.map((item) => {
+    return {
+      _id: item.idDrink,
+      name: item.strDrink,
+      image: item.strDrinkThumb,
+    };
+  });
+  return cocktails;
 };
 
 //search by category (here category is popular ingredients)
