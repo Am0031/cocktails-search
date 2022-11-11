@@ -19,7 +19,7 @@ import Nav from "./components/Nav";
 import store from "./utils/store";
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_GRAPHQL || "/graphql",
+  uri: process.env.REACT_APP_GRAPHQL || "http://localhost:3001/graphql",
   credentials: "same-origin",
 });
 
