@@ -14,19 +14,42 @@ const Detail = () => {
 
   const [currentCocktail, setCurrentCocktail] = useState({});
 
+  const getById = async (id) => {
+    const cocktail = await getCocktailDetails(id);
+    setCurrentCocktail(cocktail);
+  };
+
+  useEffect(() => {
+    getById(id);
+  }, []);
+
   return (
     <>
-      <div className="container my-1">
-        <Link to="/">← Back to Browse</Link>
-        <h2>The name of the cocktail</h2>
-        <h2>The id of the cocktail : {id}</h2>
+      {currentCocktail ? (
+        <div className="container my-1">
+          <Link to="/">← Back to Browse</Link>
+          <h2>{currentCocktail.name}</h2>
+          <h4>{id}</h4>
+          <img alt={currentCocktail.name} src={`${currentCocktail.image}`} />
 
-        <p>The description of the cocktail</p>
+          <h4>Instructions:</h4>
+          <p>{currentCocktail.description}</p>
 
-        <p>
-          <button>Add to Saved</button>
-        </p>
-      </div>
+          <h4>Ingredients:</h4>
+          {currentCocktail.ingredients ? (
+            currentCocktail.ingredients.map((item, i) => {
+              if (item) return <p key={`${id}-${i}`}>{item}</p>;
+            })
+          ) : (
+            <p>No ingredients</p>
+          )}
+          <p>
+            <button>Add to Saved</button>
+          </p>
+        </div>
+      ) : (
+        <h2>Cocktail not found</h2>
+      )}
     </>
   );
 };
