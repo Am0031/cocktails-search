@@ -5,6 +5,7 @@ import {
   UPDATE_CURRENT_CATEGORY,
   UPDATE_NAME,
   UPDATE_COCKTAILS,
+  UPDATE_CURRENT_COCKTAIL,
   REMOVE_FROM_SAVED,
   CLEAR_SAVED,
 } from "./actions";
@@ -83,6 +84,11 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         cocktails: [...action.cocktails],
+      };
+    case UPDATE_CURRENT_COCKTAIL:
+      return {
+        ...state,
+        currentCocktail: action.currentCocktail,
       };
     case REMOVE_FROM_SAVED:
       let newState = state.saved.filter((item) => {

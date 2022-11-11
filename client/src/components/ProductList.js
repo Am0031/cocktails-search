@@ -39,7 +39,7 @@ const ProductList = () => {
   };
 
   useEffect(() => {
-    if (currentSearchType === 0) {
+    if (currentSearchType === 0 && currentLetter.length > 0) {
       getByLetterAndDispatch(currentLetter);
     }
   }, [currentLetter, getByLetterAndDispatch]);
