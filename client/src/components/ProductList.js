@@ -33,19 +33,7 @@ const ProductList = () => {
 
   //function to get cocktails by category
   const getByCategoryAndDispatch = async (category) => {
-    const response = await searchCocktailsByIngredient(category);
-    let cocktails = [];
-    if (!response.ok) {
-      console.log("something went wrong!");
-    }
-    const { drinks } = await response.json();
-    cocktails = drinks.map((item) => {
-      return {
-        _id: item.idDrink,
-        name: item.strDrink,
-        image: item.strDrinkThumb,
-      };
-    });
+    const cocktails = await searchCocktailsByIngredient(category);
     dispatch({
       type: UPDATE_COCKTAILS,
       cocktails: cocktails,

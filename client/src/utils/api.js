@@ -31,10 +31,23 @@ export const searchCocktailsByName = (query) => {
 
 //search by category (here category is popular ingredients)
 // www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
-export const searchCocktailsByIngredient = (query) => {
-  return fetch(
+export const searchCocktailsByIngredient = async (query) => {
+  let cocktails = [];
+  const response = await fetch(
     `http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`
   );
+  if (!response.ok) {
+    console.log("something went wrong!");
+  }
+  const { drinks } = await response.json();
+  cocktails = drinks.map((item) => {
+    return {
+      _id: item.idDrink,
+      name: item.strDrink,
+      image: item.strDrinkThumb,
+    };
+  });
+  return cocktails;
 };
 
 //get full cocktail details by id
