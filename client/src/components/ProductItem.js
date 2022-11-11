@@ -8,7 +8,7 @@ const ProductItem = (item) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
 
-  const { image, name, _id, price, quantity } = item;
+  const { image, name, _id } = item;
 
   const { cocktails } = state;
 
@@ -31,13 +31,8 @@ const ProductItem = (item) => {
         <img alt={name} src={`/images/${image}`} />
         <p>{name}</p>
       </Link>
-      <div>
-        <div>
-          {quantity} {pluralize("item", quantity)} in stock
-        </div>
-        <span>${price}</span>
-      </div>
-      <button onClick={addToSaved}>Add to cart</button>
+      <div></div>
+      <button onClick={addToSaved}>Add to saved</button>
     </div>
   );
 };
