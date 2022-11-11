@@ -1,11 +1,10 @@
 // make a search to cocktails api
-//search by letter
-// www.thecocktaildb.com/api/json/v1/1/search.php?f=a
-export const searchCocktailsByLetter = async (query) => {
+
+//utils function to retrieve and map the response for each request
+
+const queryApi = async (url) => {
   let cocktails = [];
-  const response = await fetch(
-    `http://www.thecocktaildb.com/api/json/v1/1/search.php?f=${query}`
-  );
+  const response = await fetch(url);
 
   if (!response.ok) {
     console.log("something went wrong!");
@@ -19,47 +18,30 @@ export const searchCocktailsByLetter = async (query) => {
     };
   });
   return cocktails;
+};
+
+//search by letter
+// www.thecocktaildb.com/api/json/v1/1/search.php?f=a
+export const searchCocktailsByLetter = async (query) => {
+  return await queryApi(
+    `http://www.thecocktaildb.com/api/json/v1/1/search.php?f=${query}`
+  );
 };
 
 //search by name
 // www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita
 export const searchCocktailsByName = async (query) => {
-  const response = await fetch(
+  return await queryApi(
     `http://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`
   );
-  if (!response.ok) {
-    console.log("something went wrong!");
-  }
-  const { drinks } = await response.json();
-  const cocktails = drinks.map((item) => {
-    return {
-      _id: item.idDrink,
-      name: item.strDrink,
-      image: item.strDrinkThumb,
-    };
-  });
-  return cocktails;
 };
 
 //search by category (here category is popular ingredients)
 // www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
 export const searchCocktailsByIngredient = async (query) => {
-  let cocktails = [];
-  const response = await fetch(
+  return await queryApi(
     `http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`
   );
-  if (!response.ok) {
-    console.log("something went wrong!");
-  }
-  const { drinks } = await response.json();
-  cocktails = drinks.map((item) => {
-    return {
-      _id: item.idDrink,
-      name: item.strDrink,
-      image: item.strDrinkThumb,
-    };
-  });
-  return cocktails;
 };
 
 //get full cocktail details by id
