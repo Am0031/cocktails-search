@@ -8,22 +8,13 @@ import {
   UPDATE_CURRENT_LETTER,
   UPDATE_NAME,
 } from "../utils/actions";
-import { QUERY_CATEGORIES } from "../utils/queries";
-import { idbPromise } from "../utils/helpers";
-import { searchCocktailsByName } from "../utils/api";
 
 const CategoryMenu = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
 
-  const {
-    searchTypes,
-    currentSearchType,
-    letters,
-    currentLetter,
-    categories,
-    cocktailName,
-  } = state;
+  const { searchTypes, currentSearchType, letters, categories, cocktailName } =
+    state;
 
   const handleTypeClick = (type) => {
     dispatch({
@@ -46,23 +37,6 @@ const CategoryMenu = () => {
       dispatch({
         type: UPDATE_CURRENT_CATEGORY,
         currentCategory: item,
-      });
-    }
-  };
-
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    if (currentSearchType === 2) {
-      const response = await searchCocktailsByName(cocktailName);
-
-      if (!response.ok) {
-        throw new Error("something went wrong!");
-      }
-
-      const { drinks } = await response.json();
-      dispatch({
-        type: UPDATE_NAME,
-        cocktails: drinks,
       });
     }
   };
@@ -114,7 +88,7 @@ const CategoryMenu = () => {
         ))}
       {currentSearchType === 2 && (
         <>
-          <form onSubmit={onSubmit}>
+          <form>
             <input
               style={{ width: "400px" }}
               id="search-input"
@@ -122,7 +96,6 @@ const CategoryMenu = () => {
               placeholder="Enter a cocktail name"
               onChange={handleChange}
             ></input>
-            <button id="submit-btn">Search</button>
           </form>
         </>
       )}
