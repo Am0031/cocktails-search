@@ -2,8 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { pluralize } from "../utils/helpers";
-
-import { idbPromise } from "../utils/helpers";
+import { ADD_TO_SAVED } from "../utils/actions";
 
 const ProductItem = (item) => {
   const dispatch = useDispatch();
@@ -11,26 +10,18 @@ const ProductItem = (item) => {
 
   const { image, name, _id, price, quantity } = item;
 
-  const { cart } = state;
+  const { cocktails } = state;
 
-  const addToCart = () => {
-    const itemInCart = cart.find((cartItem) => cartItem._id === _id);
-    if (itemInCart) {
-      dispatch({
-        type: UPDATE_CART_QUANTITY,
-        _id: _id,
-        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-      });
-      idbPromise("cart", "put", {
-        ...itemInCart,
-        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-      });
+  const addToSaved = () => {
+    const selectedCocktail = cocktails.find((cartItem) => cartItem._id === _id);
+    const savedItem = cocktails.find((cartItem) => cartItem._id === _id);
+    if (savedItem) {
+      console.log("already saved");
     } else {
       dispatch({
-        type: ADD_TO_CART,
-        product: { ...item, purchaseQuantity: 1 },
+        type: ADD_TO_SAVED,
+        cocktails: { ...cocktails, selectedCocktail },
       });
-      idbPromise("cart", "put", { ...item, purchaseQuantity: 1 });
     }
   };
 
@@ -46,7 +37,7 @@ const ProductItem = (item) => {
         </div>
         <span>${price}</span>
       </div>
-      <button onClick={addToCart}>Add to cart</button>
+      <button onClick={addToSaved}>Add to cart</button>
     </div>
   );
 };
