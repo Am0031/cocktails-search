@@ -46,6 +46,28 @@ export const searchCocktailsByIngredient = async (query) => {
 
 //get full cocktail details by id
 // www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
-export const getCocktailDetails = (id) => {
-  return fetch(`http://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+export const getCocktailDetails = async (id) => {
+  const response = await fetch(
+    `http://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+  );
+  if (!response.ok) {
+    return {};
+  }
+  const { drinks } = await response.json();
+  const selectedDrink = drinks[0];
+
+  const ingredients = Object.keys(selectedDrink)
+    .filter((key) => key.includes("Ingredient"))
+    .reduce((arr, key) => {
+      arr.push(selectedDrink[key]);
+      return arr;
+    }, []);
+  const currentCocktail = {
+    _id: selectedDrink.idDrink,
+    name: selectedDrink.strDrink,
+    image: selectedDrink.strDrinkThumb,
+    description: selectedDrink.strInstructions,
+    ingredients: ingredients,
+  };
+  return currentCocktail;
 };
