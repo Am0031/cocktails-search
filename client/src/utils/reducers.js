@@ -12,6 +12,7 @@ import {
 //split states into relevant groups and then consolidate them into one initial state with spread operator - to look into when rebuilding
 const initialState = {
   cocktails: [],
+  currentCocktail: {},
   searchTypes: ["letters", "categories", "name"],
   currentSearchType: 0,
   categories: ["gin", "vodka", "bourbon", "rum", "tequila"],
