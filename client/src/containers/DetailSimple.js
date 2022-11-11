@@ -38,7 +38,7 @@ const Detail = () => {
           <h4>Ingredients:</h4>
           {currentCocktail.ingredients ? (
             currentCocktail.ingredients.map((item, i) => {
-              if (item) return <p key={`${id}-${i}`}>{item}</p>;
+              return <p key={`${id}-${i}`}>{item}</p>;
             })
           ) : (
             <p>No ingredients</p>

@@ -59,7 +59,9 @@ export const getCocktailDetails = async (id) => {
   const ingredients = Object.keys(selectedDrink)
     .filter((key) => key.includes("Ingredient"))
     .reduce((arr, key) => {
-      arr.push(selectedDrink[key]);
+      if (selectedDrink[key] !== null) {
+        arr.push(selectedDrink[key]);
+      }
       return arr;
     }, []);
   const currentCocktail = {
