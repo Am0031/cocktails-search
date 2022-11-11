@@ -27,7 +27,6 @@ const ProductList = () => {
       ) : (
         <h3>You haven't started any search yet!</h3>
       )}
-      {loading ? <img src={spinner} alt="loading" /> : null}
     </div>
   );
 };
