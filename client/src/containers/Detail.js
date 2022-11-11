@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { ADD_TO_SAVED } from "../utils/actions";
 import { idbPromise } from "../utils/helpers";
 import spinner from "../assets/spinner.gif";
+import { getCocktailDetails } from "../utils/api";
 
 const Detail = () => {
   const dispatch = useDispatch();
@@ -14,26 +15,37 @@ const Detail = () => {
 
   const [currentCocktail, setCurrentCocktail] = useState({});
 
-  const { cocktails } = state;
+  const { saved, cocktails } = state;
 
+  const getById = async (id) => {
+    const response = await getCocktailDetails(id);
+    if (!response.ok) {
+      throw new Error("something went wrong!");
+    }
+    const { drinks } = await response.json();
+    const selectedDrink = drinks[0];
+
+    const ingredients = Object.keys(selectedDrink)
+      .filter((key) => key.includes("Ingredient"))
+      .reduce((arr, key) => {
+        arr.push(selectedDrink[key]);
+        return arr;
+      }, []);
+    return {
+      _id: selectedDrink.idDrink,
+      name: selectedDrink.strDrink,
+      image: selectedDrink.strDrinkThumb,
+      description: selectedDrink.strInstructions,
+      ingredients: ingredients,
+    };
+  };
   useEffect(() => {
-    // already in global store
-    if (cocktails.length) {
-      setCurrentCocktail(cocktails.find((product) => product._id === id));
-    }
-    // get cache from idb
-    else if (!loading) {
-      idbPromise("cocktails", "get").then((indexedcocktails) => {
-        dispatch({
-          type: UPDATE_COCKTAILS,
-          cocktails: indexedcocktails,
-        });
-      });
-    }
-  }, [cocktails, data, loading, dispatch, id]);
+    //getting the cocktail bu id
+    getById(id);
+  }, [id]);
 
-  const addToSaved = () => {
-    const itemInCart = cart.find((cartItem) => cartItem._id === id);
+  const addToSaved = (id) => {
+    const itemInCart = cocktails.find((cartItem) => cartItem._id === id);
     if (itemInCart) {
       console.log("already saved");
     } else {
@@ -55,8 +67,9 @@ const Detail = () => {
           <p>{currentCocktail.description}</p>
 
           <p>
-            <strong>Price:</strong>${currentProduct.price}{" "}
-            <button onClick={addToSaved}>Add to Saved</button>
+            <button onClick={addToSaved(currentCocktail._id)}>
+              Add to Saved
+            </button>
           </p>
 
           <img
@@ -65,8 +78,6 @@ const Detail = () => {
           />
         </div>
       ) : null}
-      {loading ? <img src={spinner} alt="loading" /> : null}
-      <Cart />
     </>
   );
 };
