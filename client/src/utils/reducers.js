@@ -46,7 +46,7 @@ const initialState = {
     "Z",
   ],
   cocktailName: "",
-  currentLetter: 0,
+  currentLetter: "",
   saved: [],
 };
 
