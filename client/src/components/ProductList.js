@@ -20,6 +20,7 @@ const ProductList = () => {
 
   //function to get cocktails by letter
   const getByLetterAndDispatch = async (letter) => {
+    debugger;
     const response = await searchCocktailsByLetter(letter);
     if (!response.ok) {
       throw new Error("something went wrong!");
@@ -42,7 +43,7 @@ const ProductList = () => {
     if (currentSearchType === 0 && currentLetter.length > 0) {
       getByLetterAndDispatch(currentLetter);
     }
-  }, [currentLetter, getByLetterAndDispatch]);
+  }, [currentLetter]);
 
   return (
     <div className="my-2">

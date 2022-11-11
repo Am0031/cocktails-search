@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 
 import Home from "./containers/Home";
 import Detail from "./containers/Detail";
+import DetailSimple from "./containers/DetailSimple";
 import NoMatch from "./containers/NoMatch";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
@@ -51,7 +52,7 @@ function App() {
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/signup" element={<Signup />} />
               <Route exact path="/saved" element={<Saved />} />
-              <Route exact path="/cocktail/:id" element={<Detail />} />
+              <Route exact path="/cocktail/:id" element={<DetailSimple />} />
               <Route component={<NoMatch />} />
             </Routes>
           </Provider>
