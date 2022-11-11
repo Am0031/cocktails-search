@@ -31,27 +31,27 @@ const Detail = () => {
         arr.push(selectedDrink[key]);
         return arr;
       }, []);
-    return {
+    setCurrentCocktail({
       _id: selectedDrink.idDrink,
       name: selectedDrink.strDrink,
       image: selectedDrink.strDrinkThumb,
       description: selectedDrink.strInstructions,
       ingredients: ingredients,
-    };
+    });
   };
   useEffect(() => {
     //getting the cocktail bu id
     getById(id);
-  }, [id]);
+  });
 
   const addToSaved = (id) => {
-    const itemInCart = cocktails.find((cartItem) => cartItem._id === id);
-    if (itemInCart) {
+    const savedItem = cocktails.find((cartItem) => cartItem._id === id);
+    if (savedItem) {
       console.log("already saved");
     } else {
       dispatch({
         type: ADD_TO_SAVED,
-        cocktails: { ...state.cocktails, currentCocktail },
+        saved: { ...state.saved, currentCocktail },
       });
     }
   };
