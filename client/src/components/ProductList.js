@@ -24,19 +24,7 @@ const ProductList = () => {
 
   //function to get cocktails by letter
   const getByLetterAndDispatch = async (letter) => {
-    const response = await searchCocktailsByLetter(letter);
-    let cocktails = [];
-    if (!response.ok) {
-      console.log("something went wrong!");
-    }
-    const { drinks } = await response.json();
-    cocktails = drinks.map((item) => {
-      return {
-        _id: item.idDrink,
-        name: item.strDrink,
-        image: item.strDrinkThumb,
-      };
-    });
+    const cocktails = await searchCocktailsByLetter(letter);
     dispatch({
       type: UPDATE_COCKTAILS,
       cocktails: cocktails,
