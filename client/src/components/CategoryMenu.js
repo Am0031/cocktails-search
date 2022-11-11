@@ -70,7 +70,7 @@ const CategoryMenu = () => {
     <div>
       <h2>Choose your search type:</h2>
       {searchTypes &&
-        searchTypes.map((i) => (
+        searchTypes.map((item, i) => (
           <button
             key={i}
             id={i}
@@ -78,11 +78,12 @@ const CategoryMenu = () => {
               handleTypeClick(i);
             }}
           >
-            {categories[i]}
+            {item}
           </button>
         ))}
+      <h2>Selected search type:</h2>
       {currentSearchType === 0 &&
-        letters.map((item) => (
+        letters.map((item, i) => (
           <button
             key={item}
             id={item.toLowerCase()}
@@ -90,7 +91,7 @@ const CategoryMenu = () => {
               handleLetterClick(item.toLowerCase());
             }}
           >
-            {item.name}
+            {item}
           </button>
         ))}
       {currentSearchType === 1 &&
@@ -102,7 +103,7 @@ const CategoryMenu = () => {
               handleCategoryClick(item);
             }}
           >
-            {item.name}
+            {item}
           </button>
         ))}
       {currentSearchType === 2 && (
