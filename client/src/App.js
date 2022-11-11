@@ -18,8 +18,9 @@ import Saved from "./containers/Saved";
 import Nav from "./components/Nav";
 import store from "./utils/store";
 
+//modify url either in package.json with proxy or here in front of graphql (but currently removed because it causes problems with the cocktails api) - need to resolve before introducing backend
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_GRAPHQL || "http://localhost:3001/graphql",
+  uri: process.env.REACT_APP_GRAPHQL || "/graphql",
   credentials: "same-origin",
 });
 
