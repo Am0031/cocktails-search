@@ -3,9 +3,10 @@ import { useQuery } from "@apollo/client";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  UPDATE_CATEGORIES,
+  UPDATE_SEARCH_TYPE,
   UPDATE_CURRENT_CATEGORY,
   UPDATE_CURRENT_LETTER,
+  UPDATE_NAME,
 } from "../utils/actions";
 import { QUERY_CATEGORIES } from "../utils/queries";
 import { idbPromise } from "../utils/helpers";
@@ -34,6 +35,15 @@ const CategoryMenu = () => {
     }
   };
 
+  const handleCategoryClick = (item) => {
+    if (currentSearchType === 1) {
+      dispatch({
+        type: UPDATE_CURRENT_CATEGORY,
+        currentCategory: item,
+      });
+    }
+  };
+
   const onSubmit = async (event) => {
     event.preventDefault();
     if (currentSearchType === 2) {
@@ -45,7 +55,7 @@ const CategoryMenu = () => {
 
       const { drinks } = await response.json();
       dispatch({
-        type: UPDATE_CURRENT_NAME,
+        type: UPDATE_NAME,
         cocktails: drinks,
       });
     }
@@ -53,7 +63,7 @@ const CategoryMenu = () => {
 
   //function to handle input field change
   const handleChange = (event) => {
-    dispatch({ type: UPDATE_CURRENT_NAME, cocktailName: event.target.value });
+    dispatch({ type: UPDATE_NAME, cocktailName: event.target.value });
   };
 
   return (
